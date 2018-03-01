@@ -1,0 +1,85 @@
+ICS4U Assignment 1: Code Breaker (another name for this game is MasterMind)
+Due: Thursday March 8, 2018
+
+The purpose of this assignment is to give you practice in a number of areas:
+Working with arrays
+Working with ArrayLists
+Working with 2D Arrays
+Writing algorithms
+Writing programs that follows the games’ logic
+
+This assignment is made up of two parts. Read the entire handout before starting.
+A description of the game of CodeBreaker is below. Try playing the game here several times until you feel very familiar with it and comfortable.
+Codebreaker Rules
+This is a two person game. One person creates a hidden colour combination or code - consisting of 4 colour pegs chosen from 6 colours. The colours may be repeated. For example, the code might be Blue, Red, Red, Yellow. Your program will play the role of the first person and create a hidden code.
+
+The other player (the user) is the code-breaker and tries to figure out the code by guessing the code. Your program gives feedback on the correctness of the guess by telling the user how many correctly positioned colour pegs the guess has, and how many correct colour but incorrectly positioned pegs the guess has. This feedback is in the form of a white peg for a correct colour but incorrect position and black peg for a correctly positioned colour. The game usually goes for a maximum of 10 tries before the guesser either wins or loses.
+
+In our version of the game, we will use 6 colours (“GRBYOP”), code length 4 and maximum of 10 guesses. These are set as constants. Constants (fixed values) are variables whose values do not change once assigned. The constants VALID_CHARS, SIZE and TRIES should be initialized in the main of your program file called codeBreaker.java. These constants must remain unchanged.
+
+BONUS: In 1977, the mathematician Donald Knuth demonstrated that the code-breaker can solve the pattern in five moves or less, using an algorithm that progressively reduced the number of possible patterns. Can you figure out the algorithm?
+Code Breaker Game Methods
+In this part you will write the methods that do most of the work in your game of Code Breaker. Make sure you really understand the rules of Code Breaker as described above.
+For each method name and description given below, fill in the Javadoc and code for the Java method of the same name in codeBreaker.java. You will be graded on the quality of your Javadocs.
+
+Method Name
+Description
+createCode(str, int)
+Given a str of colours and a int representing size, return a randomly generated array of length size of single character strs comprised of the characters in the given str. Use the random library. For example, given the string “YGBOPR” and int 4, one possible list is ['G', 'B', 'R', 'B'].
+valid(array, str, int)
+Given a array of single character strs, a str, and an int, return True if every character is in the given str and the list of length equal to the given int.
+findFullyCorrect(array, array)
+Given the code (an array) and the guess (an array) return a list containing a 'b' for each correctly positioned colour in the guess. For example, if the code is ['P', 'G', 'R', 'O'] and the guess is ['Y', 'G', 'O', 'O'] then return ['b', 'b'].
+removeFullyCorrect(array, array)
+Given two arrays of single character strs, return a new array that is the result of removing from the first array all chars that are the same and in the same position in the second array. Assume that both arrays have the same length. For example, if the lists are ['A', 'B', 'C', 'D'] and ['D', 'B', 'A', 'D'] then return ['A', 'C'].
+findColourCorrect(array, array)
+Given two arrays of single character strs return an array of 'w' where the number of 'w's is equal to the number of str in the second array that have the same value as str in the first array but different position. Note that only one 'w' is returned for each str in the first array. For example if the two arrays are ['Y', 'P', 'G', 'G'] and ['G', 'P', 'O', 'R'] return ['w'].
+displayGame(array, array)
+Given a 2D array of single character strs return a string (that could be printed to the display the current state of the game. The string should begin with the headers Guess and Clues separated by a tab and ended with a new line. The next line should consist of 16 '*' characters followed by a new line. Next, each corresponding sublists of the given lists. Each character in the sublists should be separated by spaces. Each pair of sublists should be separated by a tab and on a separate line (see the sample output described in the game section for clarification). Your function should work no matter what size the guesses are and no matter how many guesses there are. For example, if the two arrays were [['Y', 'P', 'G', 'G'], ['O', 'O', 'G', 'G']] and [['b', 'b'], ['b','b', 'b', 'b']] then the function would return ''Guess\tClues\n****************\nY P G G\tb b\nO O G G\tb b b b\n'''.
+
+The Game
+In this section you will write a main program that calls your functions to create the game. In this section, your code will consist primarily of a loop, interactions with the user and calls to functions above.
+
+The program order is as follows:
+Create the secret colour code. Hint: use one of your methods to help you!
+Get the user's first guess by asking the user to:
+
+ "Please enter your guess of length X using the letters Y:"
+
+where X is the size of the code size specified in your constants and Y refers to the string 'GRBYOP' (Green, Red, Blue, Yellow, Orange, Purple) also specified in your constants.
+
+Check that the guess is valid (uses the correct characters and is the correct length). If the guess is not valid, your program should ask for a new guess using the statement:
+
+"Please enter your guess again of length X using the letters Y:"
+Determine the appropriate clue for the guess. Keep track of all the guesses and clues along the way - this way you can display the state of the game.
+Display the current state of the game including all guesses and clues. For example, after two guesses have been made, an output may look like:
+
+Guess 	Clues
+****************
+O O O O  	b
+R R R R	b b
+
+The formatting of your output must look exactly like that above with each letter separated by a space and a tab separating the guesses from the clues, one guess, clue pair per line.
+The game ends when either the player reaches the maximum number of guesses or the player guesses the code. If the player reaches the maximum number of guesses without guessing the code the message:
+
+"I'm sorry you lose. The correct code was Z."
+
+where Z is the answer code. 
+
+If the player guesses the code correctly your program should output:
+
+"Congratulations! It took you N guesses to find the code."
+
+where N is the number of guesses used.
+Marking
+Here are some general outlines and explanatory notes:
+Correctness:  your methods should perform as specified. Correctness, as measured by our tests, will count for the largest single portion of your marks. Your overall game program will be tested manually for correctness, efficiency, interface, and whether it follows the game rules described.
+Programming style: Your variable names should be meaningful and your code as simple and clear as possible. Indentation should be consistent throughout. You should avoid duplicate code by calling other methods within the module as helpers. You should use the constants rather than hard coded values (e.g., use VALID_CHARS, not 'GRBYOP'). Your functions should be written so that they would work properly even if different values are used for the constants.
+Commenting: for each method, you should write a javadoc that describes its parameters, what the method does, and what is returned by the method. All code should also have internal comments that briefly describe the logic of your code.
+Reuse: in each part, some of the functions that are specified in the table can be written by calling other functions in that table. You should do this as much as possible. Whenever you find yourself writing duplicate code you should ask yourself whether that code would be better served in a separate function.
+Design: Your program design in terms of choice of data types, algorithms, and overall design of program will be assessed.
+Warning about Plagiarism
+To detect plagiarism, a software program will be used to compare all assignments submitted for similarity to detect plagiarism. As always, the work that you submit must be your own and you must not share your work with others.
+What to Hand In
+Submit your java file codeBreaker.java to Moodle. Your files must be named exactly as codeBreaker.Java. Remember that spelling, including case, count: your file and methods must be named exactly.
+
