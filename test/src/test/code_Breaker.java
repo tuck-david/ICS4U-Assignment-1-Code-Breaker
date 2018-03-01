@@ -9,4 +9,28 @@ public class code_Breaker {
 
 	}
 
+	public static void createCode() {
+
+	}
+
+	public static void valid() {
+
+	}
+
+	public static void findFullyCorrect() {
+
+	}
+
+	public static void removeFullyCorrect() {
+
+	}
+
+	public static void findColourCorrect() {
+
+	}
+
+	public static void displayGame() {
+
+	}
 }
+
