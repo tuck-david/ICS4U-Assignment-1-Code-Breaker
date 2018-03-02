@@ -18,8 +18,9 @@ public class code_Breaker {
 
 	}
 
-	public static void createCode() {// Abdalla
-
+	public static void createCode(VALID_CHARS, SIZE) {// Abdalla
+	Random= r new Random
+        VALID_CHARS[r.nextInt(VALID_CHARS.length)
 	}
 
 	public static void valid() {// Abdalla
