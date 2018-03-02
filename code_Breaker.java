@@ -43,7 +43,7 @@ public class code_Breaker {
 				return myArray;
 			}
 
-	public static void findColourCorrect() {// David
+	public static void findColourCorrect(String[] array1, String[] array2) {// David
 		List<String> myArrayList = new ArrayList<String>();
 
 		for (int i = 0; i < array1.length; i++) {
