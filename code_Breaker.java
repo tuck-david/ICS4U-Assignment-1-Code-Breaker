@@ -9,7 +9,8 @@ import java.util.List;
 
 public class code_Breaker {
 	public static void main(String[] args) {// David and Abdalla
-		final int SIZE = 10;// max Number of guesses
+		final int SIZE = 4;// max Number of guesses
+	 	final int TRIES  = 10;
 		final String VALID_CHARS = ("GRBYOP");
 		String[] array = new String[] { "a", "b", "c", "d" };
 		String[] array2 = new String[] { "a", "b", "c", "d" };
