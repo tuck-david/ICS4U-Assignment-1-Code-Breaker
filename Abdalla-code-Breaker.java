@@ -12,3 +12,9 @@ public class code_Breaker {
 		final int SIZE = 4;// max Number of guesses
 		final int TRIES = 10;
 		final String VALID_CHARS = ("GRBYOP");
+		char[] chars = new char[VALID_CHARS.length() - 1];
+				for (int i = 0; i < VALID_CHARS.length() - 1; i++) {
+					chars[i] = VALID_CHARS.charAt(i);
+				}
+				String ran;
+				ran= ran+chars[(int)(Math.random()*6)];
