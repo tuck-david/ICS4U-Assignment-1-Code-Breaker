@@ -12,9 +12,15 @@ public class code_Breaker {
 		final int SIZE = 4;// max Number of guesses
 		final int TRIES = 10;
 		final String VALID_CHARS = ("GRBYOP");
+		public static void createCode(String VALID_CHARS, int size) {// Abdalla
 		char[] chars = new char[VALID_CHARS.length() - 1];
-				for (int i = 0; i < VALID_CHARS.length() - 1; i++) {
-					chars[i] = VALID_CHARS.charAt(i);
-				}
-				String ran;
-				ran= ran+chars[(int)(Math.random()*6)];
+		for (int i = 0; i < VALID_CHARS.length() - 1; i++) {
+			chars[i] = VALID_CHARS.charAt(i);
+		}
+		String ran = "";
+		for (int i = 0; i < size; i++) {
+			ran = ran + chars[(int) (Math.random() * 6)];
+		}
+		System.out.println(ran);
+
+	}
