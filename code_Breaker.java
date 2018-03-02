@@ -6,7 +6,9 @@ package test;
 
 public class code_Breaker {
 	public static void main(String[] args) {//David and Abdalla
-
+		final Int SIZE = 10;//max Number of guesses
+		final String VALID_CHARS = ("GRBYOP");
+		System.out.print(VALID_CHARS.legth);
 	}
 
 	public static void createCode() {//Abdalla
@@ -35,4 +37,3 @@ public class code_Breaker {
 	}
 
 }
-//testing syning #2
