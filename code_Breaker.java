@@ -10,10 +10,10 @@ import java.util.List;
 public class code_Breaker {
 	public static void main(String[] args) {// David and Abdalla
 		final int SIZE = 4;// max Number of guesses
-	 	final int TRIES  = 10;
+		final int TRIES = 10;
 		final String VALID_CHARS = ("GRBYOP");
 		String[] array = new String[] { "a", "b", "c", "d" };
-		String[] array2 = new String[] { "a", "b", "c", "d" };
+		String[] array2 = new String[] { "a", "b", "c", "e" };
 
 		System.out.println(Arrays.toString(removeFullyCorrect(array, array2)));
 
@@ -32,14 +32,14 @@ public class code_Breaker {
 	}
 
 	public static String[] removeFullyCorrect(String[] array1, String[] array2) {// David
+		ArrayList<String> arrayList = new ArrayList<String>(Arrays.asList(array1));
 
-		List<String> myArrayList = new ArrayList<String>();
 		for (int i = 0; i < array1.length; i++) {
 			if (array1[i] == array2[i]) {
-				myArrayList.add(array1[i]);
+				arrayList.remove(array1[i]);
 			}
 		}
-		String[] myArray = myArrayList.toArray(new String[myArrayList.size()]);
+		String[] myArray = arrayList.toArray(new String[arrayList.size()]);
 		return myArray;
 	}
 
