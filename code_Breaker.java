@@ -2,12 +2,15 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  * Author: David Tuck and Abdalla Date: Mar 1, 2018
  */
 
 public class code_Breaker {
+	static Scanner input = new Scanner(System.in);
+
 	public static void main(String[] args) {// David and Abdalla
 		final int SIZE = 4;// max Number of guesses
 		final int TRIES = 10;
@@ -21,6 +24,21 @@ public class code_Breaker {
 
 	public static void createCode() {// Abdalla
 
+	}
+
+	public static String getinput( int size, String valid_chars) {
+		boolean valid=true;
+		do {
+			vaild=true;
+			System.out.print("Please enter your guess of length "+(size+1)+" using the letters "+valid_chars);
+				String answer = input.nextLine();
+				if (answer.length!=size||answer) {
+
+				}
+		} while (valid==false);
+
+
+		return answer;
 	}
 
 	public static void valid() {// Abdalla
