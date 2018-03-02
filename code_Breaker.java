@@ -32,7 +32,20 @@ public class code_Breaker {
 	}
 
 	public static String[] removeFullyCorrect(String[] array1, String[] array2) {// David
+
+				List<String> myArrayList = new ArrayList<String>();
+				for (int i = 0; i < array1.length; i++) {
+					if (array1[i] == array2[i]) {
+						myArrayList.add(array1[i]);
+					}
+				}
+				String[] myArray = myArrayList.toArray(new String[myArrayList.size()]);
+				return myArray;
+			}
+
+	public static void findColourCorrect() {// David
 		List<String> myArrayList = new ArrayList<String>();
+
 		for (int i = 0; i < array1.length; i++) {
 			for (int a = 0; a < array1.length; a++) {
 				if (array1[i] == array2[a]) {
@@ -42,10 +55,6 @@ public class code_Breaker {
 		}
 		String[] myArray = myArrayList.toArray(new String[myArrayList.size()]);
 		return myArray;
-	}
-
-	public static void findColourCorrect() {// David
-
 	}
 
 	public static void displayGame() {// David
