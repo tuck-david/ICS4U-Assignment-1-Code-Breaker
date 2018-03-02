@@ -14,6 +14,7 @@ public class code_Breaker {
 	}
 
 	public static void valid() {
+		int num = 0;
 
 	}
 
