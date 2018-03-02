@@ -49,14 +49,13 @@ public class code_Breaker {
 		for (int i = 0; i < array1.length; i++) {
 			for (int a = 0; a < array1.length; a++) {
 				if (array1[i] == array2[a]) {
-					myArrayList.add(array1[i]);
+					myArrayList.add("w");
 				}
 			}
 		}
 		String[] myArray = myArrayList.toArray(new String[myArrayList.size()]);
 		return myArray;
-	}
-
+}
 	public static void displayGame() {// David
 
 	}
