@@ -20,8 +20,9 @@ public class code_Breaker {
 		String[] array = new String[] { "a", "b", "c", "d" };
 		String[] array2 = new String[] { "a", "b", "c", "e" };
 
-		System.out.println(Arrays.toString(removeFullyCorrect(array, array2)));
 
+		System.out.println(Arrays.toString(removeFullyCorrect(array, array2)));
+		System.out.println(getinput(SIZE, VALID_CHARS));
 	}
 
 	public static String[] createCode(String VALID_CHARS, int size) {// Abdalla
@@ -41,18 +42,29 @@ public class code_Breaker {
 		boolean valid = true;
 		char[] chars = new char[valid_chars.length() - 1];
 		String answer;
+		String again = " ";
 		for (int i = 0; i < valid_chars.length() - 1; i++) {
 			chars[i] = valid_chars.charAt(i);
 		}
 		do {
 			valid = true;
-			System.out.print("Please enter your guess of length " + (size + 1) + " using the letters " + valid_chars);
+			System.out.print(
+					"Please enter your guess" + again + "of length " + (size) + " using the letters " + valid_chars);
 			answer = input.nextLine();
-			if (answer.length() != size) {
 
-				System.out.println("yes");
+			if (answer.length() != size) {
+				valid = false;
+				again = " again ";
+				for (int i = 0; i < valid_chars.length() - 1; i++) {
+					for (int a = 0; a < size; a++) {
+						if (valid_chars.contains(Character.toString(answer.charAt(a)))) {
+
+						}
+					}
+				}
 
 			}
+
 		} while (valid == false);
 
 		return answer;
