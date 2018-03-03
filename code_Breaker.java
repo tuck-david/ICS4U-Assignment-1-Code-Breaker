@@ -15,6 +15,7 @@ public class code_Breaker {
 		final int SIZE = 4;// max Number of guesses
 		final int TRIES = 10;
 		final String VALID_CHARS = ("GRBYOP");
+
 		createCode(VALID_CHARS, SIZE);
 		String[] array = new String[] { "a", "b", "c", "d" };
 		String[] array2 = new String[] { "a", "b", "c", "e" };
@@ -23,27 +24,31 @@ public class code_Breaker {
 
 	}
 
-	public static void createCode(String VALID_CHARS, int size) {// Abdalla
+	public static String[] createCode(String VALID_CHARS, int size) {// Abdalla
 		char[] chars = new char[VALID_CHARS.length() - 1];
 		for (int i = 0; i < VALID_CHARS.length() - 1; i++) {
 			chars[i] = VALID_CHARS.charAt(i);
 		}
-		String ran = "";
+		String[] code = new String[size];
 		for (int i = 0; i < size; i++) {
-			ran = ran + chars[(int) (Math.random() * 6)];
+			code[i] = Character.toString(VALID_CHARS.charAt((int) (Math.random() * 6)));
 		}
-		System.out.println(ran);
-
+		System.out.println(Arrays.toString(code));
+		return code;
 	}
 
 	public static String getinput(int size, String valid_chars) {
 		boolean valid = true;
+		char[] chars = new char[valid_chars.length() - 1];
 		String answer;
+		for (int i = 0; i < valid_chars.length() - 1; i++) {
+			chars[i] = valid_chars.charAt(i);
+		}
 		do {
 			valid = true;
 			System.out.print("Please enter your guess of length " + (size + 1) + " using the letters " + valid_chars);
 			answer = input.nextLine();
-			if (answer.length() != size || answer.matches(valid_chars)) {
+			if (answer.length() != size) {
 
 				System.out.println("yes");
 
