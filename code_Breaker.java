@@ -14,14 +14,28 @@ public class code_Breaker {
 	public static void main(String[] args) {// David and Abdalla
 		final int SIZE = 4;
 		final int TRIES = 10;
+		boolean playAgain = false;
 		final String VALID_CHARS = ("GRBYOP");
+		do {// Beginning of new game
+			playAgain = true;
+			String[] genCode = createCode(VALID_CHARS, SIZE);// genCode is the code the user is trying to guess
+			String[] array = new String[] { "a", "b", "c", "d" };
+			String[] array2 = new String[] { "a", "b", "c", "e" };
 
-		createCode(VALID_CHARS, SIZE);
-		String[] array = new String[] { "a", "b", "c", "d" };
-		String[] array2 = new String[] { "a", "b", "c", "e" };
+			System.out.println(Arrays.toString(removeFullyCorrect(array, array2)));
+			System.out.println(Arrays.toString(findColourCorrect(array, array2)));
+			System.out.println(getinput(SIZE, VALID_CHARS));
+			String playAgainAnswer;
 
-		System.out.println(Arrays.toString(removeFullyCorrect(array, array2)));
-		System.out.println(getinput(SIZE, VALID_CHARS));
+			do {// do loop is for looping the game so you can play more than one game
+				System.out.println("Do you want to play again. y-yes n-no");
+				playAgainAnswer = input.nextLine();
+			} while (valid(("yn"), 1, playAgainAnswer) == false);
+			if (playAgainAnswer.equals("n")) {
+				playAgain = false;
+			}
+		} while (playAgain = true);
+
 	}
 
 	public static String[] createCode(String VALID_CHARS, int size) {// Abdalla
@@ -33,7 +47,7 @@ public class code_Breaker {
 		for (int i = 0; i < size; i++) {
 			code[i] = Character.toString(VALID_CHARS.charAt((int) (Math.random() * 6)));
 		}
-		System.out.println(Arrays.toString(code));
+
 		return code;
 	}
 
@@ -47,12 +61,12 @@ public class code_Breaker {
 			valid = true;
 			System.out.print(
 					"Please enter your guess" + again + "of length " + (size) + " using the letters " + valid_chars);
+			System.out.println();
 			answer = input.nextLine();
 
 			if (valid(valid_chars, size, answer) == false) {
 				valid = false;
 				again = " again ";
-
 			}
 
 		} while (valid == false);
@@ -61,12 +75,18 @@ public class code_Breaker {
 	}
 
 	public static boolean valid(String VALID_CHARS, int size, String guess) {// Abdalla
+		boolean guessHas = true;
 		if (guess.length() != size) {
 			return false;
 		} else {
-			return true;
-		}
+			for (int i = 0; i < size; i++) {
+				if (!VALID_CHARS.contains(Character.toString(guess.charAt(i)))) {
+					guessHas = false;
+				}
 
+			}
+			return guessHas;
+		}
 	}
 
 	public static void findFullyCorrect() {// Abdalla
