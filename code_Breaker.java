@@ -42,27 +42,16 @@ public class code_Breaker {
 		char[] chars = new char[valid_chars.length() - 1];
 		String answer;
 		String again = " ";
-		if (answer.length() == size) {
-			for (int i = 0; i < valid_chars.length() - 1; i++) {
-				chars[i] = valid_chars.charAt(i);
-			}
-		}
+
 		do {
 			valid = true;
 			System.out.print(
 					"Please enter your guess" + again + "of length " + (size) + " using the letters " + valid_chars);
 			answer = input.nextLine();
 
-			if (answer.length() != size) {
+			if (valid(valid_chars, size, answer) == false) {
 				valid = false;
 				again = " again ";
-				for (int i = 0; i < valid_chars.length() - 1; i++) {
-					for (int a = 0; a < size; a++) {
-						if (valid_chars.contains(Character.toString(answer.charAt(i)))) {
-
-						}
-					}
-				}
 
 			}
 
@@ -71,7 +60,13 @@ public class code_Breaker {
 		return answer;
 	}
 
-	public static void valid(String VALID_CHARS, int size, String again, boolean valid) {// Abdalla
+	public static boolean valid(String VALID_CHARS, int size, String guess) {// Abdalla
+		if (guess.length() != size) {
+			return false;
+		} else {
+			return true;
+		}
+
 	}
 
 	public static void findFullyCorrect() {// Abdalla
