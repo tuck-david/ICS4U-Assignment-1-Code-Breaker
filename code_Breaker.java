@@ -7,7 +7,19 @@ import java.util.Scanner;
 /**
  * Author: David Tuck and Abdalla Date: Mar 1, 2018
  */
-
+/*
+ * You get 8 attempts at breaking the code. If you can't discover it by then
+ * then you lose that game. But that's OK. You can get a new code and try again.
+ *
+ * The Code Breaker code is made up of 5 colors from the 8 available colors. To
+ * win you must place the right marbles in the right order. After each attempt
+ * you will be told how you went.
+ *
+ * White marble - Means that there is one of your marbles in the code but not in
+ * the right place. Black marble - Means that there is one of your marbles in
+ * the code and in the right place. The answer marbles are not in any particular
+ * order and don't line up with your code marbles.
+ */
 public class code_Breaker {
 	static Scanner input = new Scanner(System.in);
 
