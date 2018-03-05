@@ -30,10 +30,5 @@ public static boolean valid(String VALID_CHARS, int size,String guess) {// Abdal
  	if ( guess.length != SIZE) {
       	return false;
     }
-    for (int i=0; i>VALID_CHARS.length; i++) { //Error
-      if (color == null) {
-        // this gets us out of null-checking everywhere in the code
-        throw new IllegalArgumentException("Expected a list with all non-null entries. Received: " + colors);
-      } else{
-      }
+
 }
