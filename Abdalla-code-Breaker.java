@@ -25,10 +25,10 @@ public class code_Breaker {
 			return code;
 		}
 	}
-	public static void valid(String VALID_CHARS, int size, String again, boolean valid) {// Abdalla
- 
- if ( Valid_Chars== null || Valid_Chars.size() != SIZE) {//too many errors
-      throw new IllegalArgumentException("Expected a list of " + SIZE + " colors. Received: " + VALID_CHARS); //error
+public static boolean valid(String VALID_CHARS, int size,String guess) {// Abdalla
+
+ 	if ( guess.length != SIZE) {
+      	return false;
     }
     for (int i=0; i>VALID_CHARS.length; i++) { //Error
       if (color == null) {
