@@ -53,7 +53,7 @@ public class code_Breaker {
    System.out.print(
      "Please enter your guess" + again + "of length " + (size) + " using the letters " + valid_chars);
    answer = input.nextLine();
-  
+
 
    if (answer.length() != size) {
     valid = false;
