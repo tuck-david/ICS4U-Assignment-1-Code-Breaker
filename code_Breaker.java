@@ -27,18 +27,42 @@ public class code_Breaker {
 		final int SIZE = 4;
 		final int TRIES = 10;
 		boolean playAgain = false;
+
 		final String VALID_CHARS = ("GRBYOP");
 		do {// Beginning of new game
+			int tryCount = 0;// Counts how many guesses user has made
+			boolean exit = false;
+			String[][] guessHistory = new String[TRIES][SIZE];// 2d array the stores all guesses
+			String[][] answerHistory = new String[TRIES][VALID_CHARS.length()];
 			playAgain = true;
 			String[] genCode = createCode(VALID_CHARS, SIZE);// genCode is the code the user is trying to guess
-			String[] array = new String[] { "a", "b", "c", "d" };
-			String[] array2 = new String[] { "a", "b", "c", "e" };
+			do {// loop for each guess of a game
 
-			System.out.println(Arrays.toString(removeFullyCorrect(array, array2)));
-			System.out.println(Arrays.toString(findColourCorrect(array, array2)));
-			System.out.println(getinput(SIZE, VALID_CHARS));
+				if (tryCount >= SIZE - 1) {
+					System.out.println("I'm sorry you lose. The correct code was " + Arrays.toString(genCode));
+
+					exit = true;
+				} else {
+					System.out.println(displayGame(guessHistory, answerHistory));
+					String[] currentGuess = getinput(SIZE, VALID_CHARS, tryCount, guessHistory);
+					if (currentGuess == genCode) {
+						System.out.println("Congratulations! it took you " + (tryCount + 1) + " to find the code");
+						exit = true;
+						break;
+					}
+					String[] fullyCorrectAns = findFullyCorrect(genCode, currentGuess);
+					currentGuess = removeFullyCorrect(genCode, currentGuess);
+					String[] colourCorrctAns = findColourCorrect(genCode, currentGuess);
+					for (int i = 0; i < SIZE; i++) {
+						answerHistory[tryCount][i] = fullyCorrectAns[i];
+					}
+					for (int i = 0; i < SIZE; i++) {
+						answerHistory[tryCount][i] = fullyCorrectAns[i];
+					}
+
+				}
+			} while (exit == false);
 			String playAgainAnswer;
-
 			do {// do loop is for looping the game so you can play more than one game
 				System.out.println("Do you want to play again. y-yes n-no");
 				playAgainAnswer = input.nextLine();
@@ -63,12 +87,12 @@ public class code_Breaker {
 		return code;
 	}
 
-	public static String getinput(int size, String valid_chars) {
+	public static String[] getinput(int size, String valid_chars, int tryCount, String[][] guessHistory) {
 		boolean valid = true;
 		char[] chars = new char[valid_chars.length() - 1];
 		String answer;
 		String again = " ";
-
+		String[] currectAnswer = new String[size];
 		do {
 			valid = true;
 			System.out.print(
@@ -81,9 +105,12 @@ public class code_Breaker {
 				again = " again ";
 			}
 
+			for (int i = 0; i < answer.length(); i++) {
+				currectAnswer[i] = Character.toString(answer.charAt(i));
+			}
 		} while (valid == false);
 
-		return answer;
+		return currectAnswer;
 	}
 
 	public static boolean valid(String VALID_CHARS, int size, String guess) {// Abdalla
@@ -101,8 +128,8 @@ public class code_Breaker {
 		}
 	}
 
-	public static void findFullyCorrect() {// Abdalla
-
+	public static String[] findFullyCorrect(String[] gencode, String[] currentGuess) {// Abdalla
+		return gencode;// Too change
 	}
 
 	public static String[] removeFullyCorrect(String[] array1, String[] array2) {// David
@@ -131,8 +158,10 @@ public class code_Breaker {
 		return myArray;
 	}
 
-	public static void displayGame() {// David
+	public static String displayGame(String[][] guessHistory, String[][] answerHistory) {// David
+		String toDisplay = "Guess \tClues\n****************\n";
 
+		return toDisplay;
 	}
 
 }
