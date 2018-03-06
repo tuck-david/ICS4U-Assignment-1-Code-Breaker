@@ -109,5 +109,18 @@ public class code_Breaker {
 	}
 
 	public static String[] findFullyCorrect(String[] gencode, String[] currentGuess) {// Abdalla
-		return gencode;// Too change
+		 int blacks=0;
+        for(int i=0;i<gencode.length;i++){
+        for (int j=0;j<gencode.length;j++){
+            if(gencode[i]==currentGuess[j])
+                blacks++;
+	}
+        }
+		if (blacks==0){ 
+			System.out.println("There are no colors that are correct");
+		}
+		else{
+			System.out.println( blacks + " colors are correct");
+		}
+
 	}
