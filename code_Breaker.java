@@ -53,14 +53,16 @@ public class code_Breaker {
 					String[] fullyCorrectAns = findFullyCorrect(genCode, currentGuess);
 					currentGuess = removeFullyCorrect(genCode, currentGuess);
 					String[] colourCorrctAns = findColourCorrect(genCode, currentGuess);
+					List<String> answerHistoryList = new ArrayList<String>();
 					for (int i = 0; i < SIZE; i++) {
 						answerHistory[tryCount][i] = fullyCorrectAns[i];
 					}
 					for (int i = 0; i < SIZE; i++) {
-						answerHistory[tryCount][i] = fullyCorrectAns[i];
+						answerHistory[tryCount][i] = colourCorrctAns[i];
 					}
 
 				}
+				tryCount++;
 			} while (exit == false);
 			String playAgainAnswer;
 			do {// do loop is for looping the game so you can play more than one game
@@ -105,7 +107,7 @@ public class code_Breaker {
 				again = " again ";
 			}
 
-			for (int i = 0; i < answer.length(); i++) {
+			for (int i = 0; i < answer.length(); i++) {// converts string to single char arrays
 				currectAnswer[i] = Character.toString(answer.charAt(i));
 			}
 		} while (valid == false);
