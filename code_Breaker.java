@@ -197,9 +197,10 @@ public class code_Breaker {
 
 		int blacks = 0;
 		for (int i = 0; i < gencode.length; i++) {
-			if (gencode[i] == currentGuess[i])
+			if (gencode[i].equals(currentGuess[i]))
 				blacks++;
 		}
+		System.out.println("B----" + blacks);
 		String[] toReturn = new String[blacks];
 		for (int i = 0; i < toReturn.length; i++) {
 			toReturn[i] = "b";
@@ -212,7 +213,7 @@ public class code_Breaker {
 		ArrayList<String> arrayList = new ArrayList<String>(Arrays.asList(currentGuess));
 
 		for (int i = 0; i < gencode.length; i++) {
-			if (gencode[i] == currentGuess[i]) {
+			if (gencode[i].equals(currentGuess[i])) {
 				arrayList.remove(gencode[i]);
 			}
 		}
@@ -221,12 +222,12 @@ public class code_Breaker {
 		return myArray;
 	}
 
-	public static String[] findColourCorrect(String[] array1, String[] array2) {// David
+	public static String[] findColourCorrect(String[] array2, String[] array1) {// David
 		List<String> myArrayList = new ArrayList<String>();
 
 		for (int i = 0; i < array1.length; i++) {
 			for (int a = 0; a < array1.length; a++) {
-				if (array1[i] == array2[a]) {
+				if (array1[i].equals(array2[a])) {
 					myArrayList.add("w");
 				}
 			}
