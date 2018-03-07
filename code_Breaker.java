@@ -159,7 +159,18 @@ public class code_Breaker {
 
 		return currectAnswer;
 	}
-
+	
+	
+        /**
+	* Allows the user to input their guess of the code that was randomly generated. 
+	*
+	* @param VALID_CHARS  
+	*        SIZE              
+	*        guess
+	*                     
+	*                     
+	*                    
+	*/ 
 	public static boolean valid(String VALID_CHARS, int size, String guess) {// Abdalla
 		boolean guessHas = true;
 		if (guess.length() != size) {
