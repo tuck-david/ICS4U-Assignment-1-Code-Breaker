@@ -7,19 +7,7 @@ import java.util.Scanner;
 /**
  * Author: David Tuck and Abdalla Date: Mar 1, 2018
  */
-/*
- * You get 10 attempts at breaking the code. If you can't discover it by then
- * then you lose that game. But that's OK. You can get a new code and try again.
- *
- * The Code Breaker code is made up of 4 colors from the 6 available colors. To
- * win you must place the right marbles in the right order. After each attempt
- * you will be told how you went.
- *
- * White marble - Means that there is one of your marbles in the code but not in
- * the right place. Black marble - Means that there is one of your marbles in
- * the code and in the right place. The answer marbles are not in any particular
- * order and don't line up with your code marbles.
- */
+
 public class code_Breaker {
 	static Scanner input = new Scanner(System.in);
 
@@ -27,9 +15,15 @@ public class code_Breaker {
 		final int SIZE = 4;
 		final int TRIES = 10;
 		boolean playAgain = false;
-
 		final String VALID_CHARS = ("GRBYOP");
+		System.out.println("Hello and Welcome to the code breaker game");
 		do {// Beginning of new game
+			System.out.println(
+					"If you would like to see the rules please enter 'r' now. Enter anything else to continue");
+			if (input.nextLine().equalsIgnoreCase("r")) {
+				rules(VALID_CHARS, SIZE);
+			}
+			System.out.println("\t**********NEW GAME**********");
 			int tryCount = 0;// Counts how many guesses user has made
 			boolean exit = false;
 			String[][] guessHistory = new String[TRIES][SIZE];// 2d array the stores all guesses
@@ -40,22 +34,15 @@ public class code_Breaker {
 			for (String[] strings : guessHistory) {// fills array so there is no null
 				Arrays.fill(strings, "");
 			}
-
 			playAgain = false;
 			String[] genCode = createCode(VALID_CHARS, SIZE);// genCode is the code the user is trying to guess
 			do {// loop for each guess of a game
-
 				if (tryCount >= TRIES) {
 					System.out.println("I'm sorry you lose. The correct code was " + Arrays.toString(genCode));
-
 					exit = true;
 				} else {
 					int writePos = 0;
 					System.out.println(Arrays.toString(genCode));
-					// for (int i = 0; i < TRIES; i++) {
-					// System.out.println("GuessHistory: " + Arrays.toString(guessHistory[i]));
-					// }
-
 					System.out.println(displayGame(guessHistory, answerHistory, tryCount));
 					String[] currentGuess = getinput(SIZE, VALID_CHARS);
 					for (int i = 0; i < SIZE; i++) {
@@ -73,14 +60,10 @@ public class code_Breaker {
 						exit = true;
 						break;
 					}
-
 					String[] fullyCorrectAns = findFullyCorrect(genCode, currentGuess);
-
 					currentGuess = removeFullyCorrect(genCode, currentGuess);
-
 					String[] colourCorrctAns = findColourCorrect(genCode, currentGuess);
 					List<String> answerHistoryList = new ArrayList<String>();
-
 					for (int i = 0; i < fullyCorrectAns.length; i++) {
 						answerHistory[tryCount][writePos] = fullyCorrectAns[i];
 						writePos++;
@@ -89,7 +72,6 @@ public class code_Breaker {
 						answerHistory[tryCount][writePos] = colourCorrctAns[i];
 						writePos++;
 					}
-
 				}
 				tryCount++;
 			} while (exit == false);
@@ -98,7 +80,7 @@ public class code_Breaker {
 				System.out.println("Do you want to play again. press y for yes and press n for no");
 				playAgainAnswer = input.nextLine();
 			} while (valid(("yn"), 1, playAgainAnswer) == false);
-			if (playAgainAnswer.equals("y")) {
+			if (playAgainAnswer.equalsIgnoreCase("y")) {
 				playAgain = true;
 			}
 		} while (playAgain == true);
@@ -116,16 +98,15 @@ public class code_Breaker {
 	 *         six colors in the list duplicated or not
 	 */
 
-	public static String[] createCode(String VALID_CHARS, int size) {// Abdalla
+	public static String[] createCode(String VALID_CHARS, int SIZE) {// Abdalla
 		char[] chars = new char[VALID_CHARS.length() - 1];
 		for (int i = 0; i < VALID_CHARS.length() - 1; i++) {
 			chars[i] = VALID_CHARS.charAt(i);
 		}
-		String[] code = new String[size];
-		for (int i = 0; i < size; i++) {
+		String[] code = new String[SIZE];
+		for (int i = 0; i < SIZE; i++) {
 			code[i] = Character.toString(VALID_CHARS.charAt((int) (Math.random() * 6)));
 		}
-
 		return code;
 	}
 
@@ -134,37 +115,33 @@ public class code_Breaker {
 	 *
 	 * @param VALID_CHARS
 	 *            the colors that the user would have to use when inputting their
-	 *            guess SIZE the size/length of the code that the user must guess
+	 *            guess SIZE the SIZE/length of the code that the user must guess
 	 * @return the guess of the user, if the guess was incorrect the user will be
 	 *         able to guess once again, until the last attempt, or guess the
 	 *         correct code that was generated
 	 *
 	 */
 
-	public static String[] getinput(int size, String valid_chars) {
-
+	public static String[] getinput(int SIZE, String VALID_CHARS) {
 		boolean valid = true;
-		char[] chars = new char[valid_chars.length() - 1];
+		char[] chars = new char[VALID_CHARS.length() - 1];
 		String answer;
 		String again = " ";
-		String[] currectAnswer = new String[size];
+		String[] currectAnswer = new String[SIZE];
 		do {
 			valid = true;
-			System.out.print("Please enter your guess" + again + "with a length of " + (size) + " using the letters "
-					+ valid_chars);
+			System.out.print("Please enter your guess" + again + "with a length of " + (SIZE)
+					+ " using the capital letters " + VALID_CHARS);
 			System.out.println();
 			answer = input.nextLine();
-
-			if (valid(valid_chars, size, answer) == false) {
+			if (valid(VALID_CHARS, SIZE, answer) == false) {
 				valid = false;
 				again = " again ";
 			}
-
 			for (int i = 0; i < currectAnswer.length; i++) {// converts string to single char arrays
 				currectAnswer[i] = Character.toString(answer.charAt(i));
 			}
 		} while (valid == false);
-
 		return currectAnswer;
 	}
 
@@ -177,17 +154,16 @@ public class code_Breaker {
 	 *
 	 *
 	 */
-	public static boolean valid(String VALID_CHARS, int size, String guess) {// Abdalla
+	public static boolean valid(String VALID_CHARS, int SIZE, String guess) {// Abdalla
 		boolean guessHas = true;
-		System.out.println("The size is " + guess.length() + "The size is " + size);
-		if (guess.length() == size) {
-			return true;
+
+		if (guess.length() != SIZE) {
+			return false;
 		} else {
-			for (int i = 0; i < size; i++) {
+			for (int i = 0; i < SIZE; i++) {
 				if (!VALID_CHARS.contains(Character.toString(guess.charAt(i)))) {
 					guessHas = false;
 				}
-
 			}
 			return guessHas;
 		}
@@ -200,66 +176,66 @@ public class code_Breaker {
 			if (gencode[i].equals(currentGuess[i]))
 				blacks++;
 		}
-		System.out.println("B----" + blacks);
+
 		String[] toReturn = new String[blacks];
 		for (int i = 0; i < toReturn.length; i++) {
 			toReturn[i] = "b";
 		}
-		System.out.println("Fully correct" + Arrays.toString(toReturn));
 		return toReturn;
 	}
 
 	public static String[] removeFullyCorrect(String[] gencode, String[] currentGuess) {// David
 		ArrayList<String> arrayList = new ArrayList<String>(Arrays.asList(currentGuess));
-
 		for (int i = 0; i < gencode.length; i++) {
 			if (gencode[i].equals(currentGuess[i])) {
 				arrayList.remove(gencode[i]);
 			}
 		}
 		String[] myArray = arrayList.toArray(new String[arrayList.size()]);
-		System.out.println("Remove Fully" + Arrays.toString(myArray));
 		return myArray;
 	}
 
-	public static String[] findColourCorrect(String[] array2, String[] array1) {// David
+	public static String[] findColourCorrect(String[] gencode, String[] currentGuess) {// David
 		List<String> myArrayList = new ArrayList<String>();
-
-		for (int i = 0; i < array1.length; i++) {
-			for (int a = 0; a < array1.length; a++) {
-				if (array1[i].equals(array2[a])) {
+		for (int i = 0; i < currentGuess.length; i++) {
+			for (int a = 0; a < currentGuess.length; a++) {
+				if (currentGuess[i].equals(gencode[a])) {
 					myArrayList.add("w");
 				}
 			}
 		}
 		String[] myArray = myArrayList.toArray(new String[myArrayList.size()]);
-		System.out.println("Colur correct" + Arrays.toString(myArray));
 		return myArray;
 	}
 
 	public static String displayGame(String[][] guessHistory, String[][] answerHistory, int tryCount) {// David
-
-		String toDisplay = "Guess \tClues\n****************\n";
+		String toDisplay = "Guess \t \tClues\n****************\n";
 		String temp;
-
 		for (int i = 0; i < tryCount; i++) {// Adds multiple rows
 			for (int j = 0; j < guessHistory[0].length; j++) {// adds guess history
 				temp = guessHistory[i][j];
-
 				toDisplay = toDisplay + temp + " ";
-
 			}
 			toDisplay += "\t";// format to add new line
 			for (int j = 0; j < guessHistory[0].length; j++) {// adds clue history
 				temp = answerHistory[i][j];
-
 				toDisplay = toDisplay + temp + " ";
-
 			}
 			toDisplay += "\n";// format to add new line
-
 		}
 		return toDisplay;
 	}
 
+	public static void rules(String VALID_CHARS, int SIZE) {
+		System.out.println(" You get 10 attempts at breaking the code. \n"
+				+ "If you can't discover it by then, then you lose that game. \n"
+				+ "But that's OK. You can get a new code and try again.\n\n" + "The Code Breaker code is made up of "
+				+ SIZE + " colors from " + VALID_CHARS.length() + " available colors.\n"
+				+ "These colors are symbolized as the following characters+VALID_CHARS+. \n"
+				+ "In addition b=black and w= white. To win you must place the  right marbles in the right order.\n"
+				+ "After each attempt you will be told how you  went.\n\n"
+				+ "White clue - Means that there is one of your colors is in the code but not in  the right place. \n"
+				+ "Black clue - Means that there is one of your colors in the code and in the right place. \n"
+				+ "The answer clues are not in any particular order and don't line up with your guess colors.");
+	}
 }
