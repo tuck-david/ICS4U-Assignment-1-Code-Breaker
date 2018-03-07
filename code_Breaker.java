@@ -122,7 +122,19 @@ public class code_Breaker {
 		return code;
 	}
 
-	public static String[] getinput(int size, String valid_chars, int tryCount, String[][] guessHistory) {
+	/**
+	* Allows the user to input their guess of the code that was randomly generated. 
+	*
+	* @param VALID_CHARS  the colors that the user would have to use when inputting
+	*                     their guess
+	*        SIZE         the size/length of the code that the user must guess      
+	* @return             the guess of the user, if the guess was incorrect the 
+	*                     user will be able to guess once again, until the last 
+	*                     attempt, or guess the correct code that was generated
+	*                    
+	*/ 
+	
+	public static String[] getinput(int size, String valid_chars ) {
 		boolean valid = true;
 		char[] chars = new char[valid_chars.length() - 1];
 		String answer;
