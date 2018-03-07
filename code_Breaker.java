@@ -129,23 +129,20 @@ public class code_Breaker {
 		return code;
 	}
 
-<<<<<<< HEAD
-	public static String[] getinput(int size, String valid_chars) {
-=======
 	/**
-	* Allows the user to input their guess of the code that was randomly generated. 
-	*
-	* @param VALID_CHARS  the colors that the user would have to use when inputting
-	*                     their guess
-	*        SIZE         the size/length of the code that the user must guess      
-	* @return             the guess of the user, if the guess was incorrect the 
-	*                     user will be able to guess once again, until the last 
-	*                     attempt, or guess the correct code that was generated
-	*                    
-	*/ 
-	
-	public static String[] getinput(int size, String valid_chars ) {
->>>>>>> ab05e5de249a4c4e534178c3fd1fee42525ef8fa
+	 * Allows the user to input their guess of the code that was randomly generated.
+	 *
+	 * @param VALID_CHARS
+	 *            the colors that the user would have to use when inputting their
+	 *            guess SIZE the size/length of the code that the user must guess
+	 * @return the guess of the user, if the guess was incorrect the user will be
+	 *         able to guess once again, until the last attempt, or guess the
+	 *         correct code that was generated
+	 *
+	 */
+
+	public static String[] getinput(int size, String valid_chars) {
+
 		boolean valid = true;
 		char[] chars = new char[valid_chars.length() - 1];
 		String answer;
@@ -170,18 +167,16 @@ public class code_Breaker {
 
 		return currectAnswer;
 	}
-	
-	
-        /**
-	* Allows the user to input their guess of the code that was randomly generated. 
-	*
-	* @param VALID_CHARS  
-	*        SIZE              
-	*        guess
-	*                     
-	*                     
-	*                    
-	*/ 
+
+	/**
+	 * Allows the user to input their guess of the code that was randomly generated.
+	 *
+	 * @param VALID_CHARS
+	 *            SIZE guess
+	 *
+	 *
+	 *
+	 */
 	public static boolean valid(String VALID_CHARS, int size, String guess) {// Abdalla
 		boolean guessHas = true;
 		System.out.println("The size is " + guess.length() + "The size is " + size);
