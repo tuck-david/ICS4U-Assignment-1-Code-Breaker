@@ -43,6 +43,7 @@ public class code_Breaker {
 
 					exit = true;
 				} else {
+
 					System.out.println(displayGame(guessHistory, answerHistory));
 					String[] currentGuess = getinput(SIZE, VALID_CHARS, tryCount, guessHistory);
 					if (currentGuess == genCode) {
@@ -50,15 +51,19 @@ public class code_Breaker {
 						exit = true;
 						break;
 					}
+
 					String[] fullyCorrectAns = findFullyCorrect(genCode, currentGuess);
 					currentGuess = removeFullyCorrect(genCode, currentGuess);
 					String[] colourCorrctAns = findColourCorrect(genCode, currentGuess);
 					List<String> answerHistoryList = new ArrayList<String>();
-					for (int i = 0; i < SIZE; i++) {
-						answerHistory[tryCount][i] = fullyCorrectAns[i];
+					int writePos = 0;
+					for (int i = 0; i < fullyCorrectAns.length; i++) {
+						answerHistory[tryCount][writePos] = fullyCorrectAns[i];
+						writePos++;
 					}
-					for (int i = 0; i < SIZE; i++) {
-						answerHistory[tryCount][i] = colourCorrctAns[i];
+					for (int i = 0; i < colourCorrctAns.length; i++) {
+						answerHistory[tryCount][writePos] = colourCorrctAns[i];
+						writePos++;
 					}
 
 				}
@@ -131,7 +136,17 @@ public class code_Breaker {
 	}
 
 	public static String[] findFullyCorrect(String[] gencode, String[] currentGuess) {// Abdalla
-		return gencode;// Too change
+
+		int blacks = 0;
+		for (int j = 0; j < gencode.length; j++) {
+			if (gencode[j] == currentGuess[j])
+				blacks++;
+		}
+		String[] toReturn = new String[blacks];
+		for (int i = 0; i < toReturn.length; i++) {
+			toReturn[i] = "b";
+		}
+		return toReturn;
 	}
 
 	public static String[] removeFullyCorrect(String[] array1, String[] array2) {// David
