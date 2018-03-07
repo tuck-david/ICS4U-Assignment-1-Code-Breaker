@@ -8,10 +8,10 @@ import java.util.Scanner;
  * Author: David Tuck and Abdalla Date: Mar 1, 2018
  */
 /*
- * You get 8 attempts at breaking the code. If you can't discover it by then
+ * You get 10 attempts at breaking the code. If you can't discover it by then
  * then you lose that game. But that's OK. You can get a new code and try again.
  *
- * The Code Breaker code is made up of 5 colors from the 8 available colors. To
+ * The Code Breaker code is made up of 4 colors from the 6 available colors. To
  * win you must place the right marbles in the right order. After each attempt
  * you will be told how you went.
  *
@@ -83,7 +83,7 @@ public class code_Breaker {
 			} while (exit == false);
 			String playAgainAnswer;
 			do {// do loop is for looping the game so you can play more than one game
-				System.out.println("Do you want to play again. y-yes n-no");
+				System.out.println("Do you want to play again. press y for yes and press n for no");
 				playAgainAnswer = input.nextLine();
 			} while (valid(("yn"), 1, playAgainAnswer) == false);
 			if (playAgainAnswer.equals("n")) {
