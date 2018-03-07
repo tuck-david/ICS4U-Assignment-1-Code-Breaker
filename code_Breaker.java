@@ -34,29 +34,38 @@ public class code_Breaker {
 			boolean exit = false;
 			String[][] guessHistory = new String[TRIES][SIZE];// 2d array the stores all guesses
 			String[][] answerHistory = new String[TRIES][VALID_CHARS.length()];
+
 			playAgain = true;
 			String[] genCode = createCode(VALID_CHARS, SIZE);// genCode is the code the user is trying to guess
 			do {// loop for each guess of a game
 
-				if (tryCount >= TRIES ) {
+				if (tryCount >= TRIES) {
 					System.out.println("I'm sorry you lose. The correct code was " + Arrays.toString(genCode));
 
 					exit = true;
 				} else {
 					int writePos = 0;
 					System.out.println(Arrays.toString(genCode));
-					System.out.println(Arrays.toString(guessHistory[tryCount]));
+					for (int i = 0; i < TRIES; i++) {
+						System.out.println("GuessHistory: " + Arrays.toString(guessHistory[i]));
+					}
 
 					System.out.println(displayGame(guessHistory, answerHistory, tryCount));
 					String[] currentGuess = getinput(SIZE, VALID_CHARS, tryCount, guessHistory);
-					if (currentGuess == genCode) {
+					for (int i = 0; i < SIZE; i++) {
+						guessHistory[tryCount][i] = currentGuess[i];
+					}
+
+					if (currentGuess.equals(genCode)) {
 						System.out.println("Congratulations! it took you " + (tryCount + 1) + " to find the code");
 						exit = true;
 						break;
 					}
 
 					String[] fullyCorrectAns = findFullyCorrect(genCode, currentGuess);
+
 					currentGuess = removeFullyCorrect(genCode, currentGuess);
+
 					String[] colourCorrctAns = findColourCorrect(genCode, currentGuess);
 					List<String> answerHistoryList = new ArrayList<String>();
 
@@ -153,7 +162,7 @@ public class code_Breaker {
 	}
 
 	public static String[] removeFullyCorrect(String[] array1, String[] array2) {// David
-		ArrayList<String> arrayList = new ArrayList<String>(Arrays.asList(array1));
+		ArrayList<String> arrayList = new ArrayList<String>(Arrays.asList(array2));
 
 		for (int i = 0; i < array1.length; i++) {
 			if (array1[i] == array2[i]) {
@@ -175,17 +184,31 @@ public class code_Breaker {
 			}
 		}
 		String[] myArray = myArrayList.toArray(new String[myArrayList.size()]);
+
 		return myArray;
 	}
 
 	public static String displayGame(String[][] guessHistory, String[][] answerHistory, int tryCount) {// David
-		String toDisplay = "Guess \tClues\n****************\n";
 
-		for (int i = 0; i < tryCount; i++) {
-			for (int j = 0; j < guessHistory[0].length; j++) {
-				toDisplay = toDisplay + answerHistory[i][j] + " ";
+
+		String toDisplay = "Guess \tClues\n****************\n";
+		String temp;
+
+		for (int i = 0; i < tryCount; i++) {// Adds multiple rows
+			for (int j = 0; j < guessHistory[0].length; j++) {// adds guess history
+				temp = guessHistory[i][j];
+
+				toDisplay = toDisplay + temp + " ";
+
 			}
-			System.out.println();
+			toDisplay += "\t";// format to add new line
+			for (int j = 0; j < guessHistory[0].length; j++) {// adds clue history
+				temp = answerHistory[i][j];
+
+				toDisplay = toDisplay + temp + " ";
+
+			}
+			toDisplay += "\n";// format to add new line
 
 		}
 		return toDisplay;
