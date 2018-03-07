@@ -38,13 +38,16 @@ public class code_Breaker {
 			String[] genCode = createCode(VALID_CHARS, SIZE);// genCode is the code the user is trying to guess
 			do {// loop for each guess of a game
 
-				if (tryCount >= SIZE - 1) {
+				if (tryCount >= TRIES ) {
 					System.out.println("I'm sorry you lose. The correct code was " + Arrays.toString(genCode));
 
 					exit = true;
 				} else {
+					int writePos = 0;
+					System.out.println(Arrays.toString(genCode));
+					System.out.println(Arrays.toString(guessHistory[tryCount]));
 
-					System.out.println(displayGame(guessHistory, answerHistory));
+					System.out.println(displayGame(guessHistory, answerHistory, tryCount));
 					String[] currentGuess = getinput(SIZE, VALID_CHARS, tryCount, guessHistory);
 					if (currentGuess == genCode) {
 						System.out.println("Congratulations! it took you " + (tryCount + 1) + " to find the code");
@@ -56,7 +59,7 @@ public class code_Breaker {
 					currentGuess = removeFullyCorrect(genCode, currentGuess);
 					String[] colourCorrctAns = findColourCorrect(genCode, currentGuess);
 					List<String> answerHistoryList = new ArrayList<String>();
-					int writePos = 0;
+
 					for (int i = 0; i < fullyCorrectAns.length; i++) {
 						answerHistory[tryCount][writePos] = fullyCorrectAns[i];
 						writePos++;
@@ -175,9 +178,16 @@ public class code_Breaker {
 		return myArray;
 	}
 
-	public static String displayGame(String[][] guessHistory, String[][] answerHistory) {// David
+	public static String displayGame(String[][] guessHistory, String[][] answerHistory, int tryCount) {// David
 		String toDisplay = "Guess \tClues\n****************\n";
 
+		for (int i = 0; i < tryCount; i++) {
+			for (int j = 0; j < guessHistory[0].length; j++) {
+				toDisplay = toDisplay + answerHistory[i][j] + " ";
+			}
+			System.out.println();
+
+		}
 		return toDisplay;
 	}
 
