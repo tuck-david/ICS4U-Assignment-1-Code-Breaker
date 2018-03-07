@@ -34,6 +34,12 @@ public class code_Breaker {
 			boolean exit = false;
 			String[][] guessHistory = new String[TRIES][SIZE];// 2d array the stores all guesses
 			String[][] answerHistory = new String[TRIES][VALID_CHARS.length()];
+			for (String[] strings : answerHistory) {//fills array so there is no null
+				Arrays.fill(strings, "");
+			}
+			for (String[] strings : guessHistory) {//fills array so there is no null
+				Arrays.fill(strings, "");
+			}
 
 			playAgain = true;
 			String[] genCode = createCode(VALID_CHARS, SIZE);// genCode is the code the user is trying to guess
@@ -189,7 +195,6 @@ public class code_Breaker {
 	}
 
 	public static String displayGame(String[][] guessHistory, String[][] answerHistory, int tryCount) {// David
-
 
 		String toDisplay = "Guess \tClues\n****************\n";
 		String temp;
