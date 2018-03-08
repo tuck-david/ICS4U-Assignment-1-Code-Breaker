@@ -175,10 +175,18 @@ public class code_Breaker {
 	}
 
 	/**
+	 * Checks if the user's guess have the correct color and if
+	 * they are positioned correctly.
+	 * 
 	 *
-	 * @param gencode
-	 * @param currentGuess
-	 * @return
+	 * @param gencode           compares the generated code that the computer has made in random
+	 * @param currentGuess      Takes the guess of the user and compares it with the generated
+	 *                          code for the correct color and position
+	 * @return                  If the guess has none of the correct color or position then does 
+	 *                          does not return anything, and asks to guess again, if guess has
+	 *                          any amount of colors and in the correct position will output a
+	 *                          number abount of correct with b indicating a black peg and that
+	 *                          the position and color is correct.
 	 */
 	public static String[] findFullyCorrect(String[] gencode, String[] currentGuess) {// Abdalla
 
@@ -259,12 +267,10 @@ public class code_Breaker {
 	/**
 	 * This method 'rules' displays the rules for the user.
 	 *
-	 * @param VALID_CHARS
-	 *            The colors that the user would have to use when inputting their
-	 *            guess. Each character in the string represents a different color.
-	 * @param SIZE
-	 *            The SIZE/length of the code that the user must guess.
-	 *
+	 * @param VALID_CHARS      The colors that the user would have to use when inputting their
+	 *                         guess. Each character in the string represents a different color.
+	 * @param SIZE             The SIZE/length of the code that the user must guess
+	 * @return                 Returns and displays the rules if indicated to
 	 */
 	public static void rules(String VALID_CHARS, int SIZE) {
 		System.out.println(" You get 10 attempts at breaking the code. \n"
