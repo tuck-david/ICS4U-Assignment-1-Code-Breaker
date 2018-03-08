@@ -180,6 +180,7 @@ public class code_Breaker {
 	 * 
 	 *
 	 * @param gencode           compares the generated code that the computer has made in random
+	 *                          to the code the user has guessed
 	 * @param currentGuess      Takes the guess of the user and compares it with the generated
 	 *                          code for the correct color and position
 	 * @return                  If the guess has none of the correct color or position then does 
@@ -204,10 +205,15 @@ public class code_Breaker {
 	}
 
 	/**
+	 *Checks if the user's guess is the same length as the generated code.
 	 *
-	 * @param gencode
-	 * @param currentGuess
-	 * @return
+	 * @param gencode        compares the generated code that the computer has made in random
+	 *                       to the code the user has guessed   
+	 * @param currentGuess   Takes the guess of the user and compares it with the generated
+	 *                       code to check for the same length of the generated code
+	 * @return               If the guess size is not the same will be asked to guess again
+	 *                       if the guess size is the same as the generated code it will 
+	 *                       accept the guess and return it                     
 	 */
 	public static String[] removeFullyCorrect(String[] gencode, String[] currentGuess) {// David
 		ArrayList<String> arrayList = new ArrayList<String>(Arrays.asList(currentGuess));
@@ -221,10 +227,17 @@ public class code_Breaker {
 	}
 
 	/**
+	 *Checks if the user's guess have the correct color.
 	 *
-	 * @param gencode
-	 * @param currentGuess
-	 * @return
+	 * @param gencode        compares the generated code that the computer has made in random
+	 *                       to the code the user has guessed   
+	 * @param currentGuess   Takes the guess of the user and compares it with the generated
+	 *                       code for the correct color 
+	 * @return               If the guess has none of the correct colors then does 
+	 *                       not return anything, and asks to guess again, if guess has
+	 *                       any amount of colors correct it  will output the number
+	 *                       amount of correct with w indicating a white peg and that
+	 *                       the color is correct.
 	 */
 	public static String[] findColourCorrect(String[] gencode, String[] currentGuess) {// David
 		ArrayList<String> myArrayList = new ArrayList<String>();
@@ -270,7 +283,7 @@ public class code_Breaker {
 	 * @param VALID_CHARS      The colors that the user would have to use when inputting their
 	 *                         guess. Each character in the string represents a different color.
 	 * @param SIZE             The SIZE/length of the code that the user must guess
-	 * @return                 Returns and displays the rules if indicated to
+	 * @return                 Returns and displays the rules 
 	 */
 	public static void rules(String VALID_CHARS, int SIZE) {
 		System.out.println(" You get 10 attempts at breaking the code. \n"
