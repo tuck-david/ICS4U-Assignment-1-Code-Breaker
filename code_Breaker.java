@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 /**
- * Date: Mar 1, 2018
+ * Date: Mar 1, 2018 Assignment: Code Breaker
  *
  * @Author David Tuck
  * @author Abdalla
@@ -13,7 +13,7 @@ import java.util.Scanner;
 public class code_Breaker {
 	static Scanner input = new Scanner(System.in);
 
-	public static void main(String[] args) {// David and Abdalla
+	public static void main(String[] args) {// David
 		final int SIZE = 4;
 		final int TRIES = 10;
 		boolean playAgain = false;
@@ -137,10 +137,12 @@ public class code_Breaker {
 			if (valid(VALID_CHARS, SIZE, currentGuess) == false) {
 				valid = false;
 				again = " again ";
+			} else {
+				for (int i = 0; i < currectAnswer.length; i++) {// converts string to single char arrays
+					currectAnswer[i] = Character.toString(currentGuess.charAt(i));
+				}
 			}
-			for (int i = 0; i < currectAnswer.length; i++) {// converts string to single char arrays
-				currectAnswer[i] = Character.toString(currentGuess.charAt(i));
-			}
+
 		} while (valid == false);
 		return currectAnswer;
 	}
@@ -247,8 +249,6 @@ public class code_Breaker {
 	 */
 	public static String[] findColourCorrect(String[] gencodeCOPY, String[] currentGuess) {// David
 		ArrayList<String> holderList = new ArrayList<String>();// used an arrayList because it is dynamic
-		ArrayList<String> genCodeList = new ArrayList<String>(Arrays.asList(gencodeCOPY));// used a array list because
-																							// of the contains function
 		// for (int i = 0; i < currentGuess.length; i++) {
 		// if (genCodeList.contains(currentGuess[i])) {
 		// holderList.add("w");
