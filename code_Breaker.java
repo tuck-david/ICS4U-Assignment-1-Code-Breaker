@@ -23,7 +23,7 @@ public class code_Breaker {
 		boolean displaygenCode = false;
 		do {// Beginning of new game
 			displaygenCode = false;
-			System.out.println("If you would like to see the rules please enter 'r' now.\nEnter anything else to continue");
+			System.out.println("If you would like to see the rules please enter 'r' now.\nor enter anything else to continue");
 			if (input.nextLine().equalsIgnoreCase("r")) {// checks to see if user wants to see the rules
 				rules(VALID_CHARS, SIZE, TRIES);
 			}
@@ -36,8 +36,8 @@ public class code_Breaker {
 			int tryCount = 0;// Counts how many guesses user has made
 			boolean exit = false;// boolean to track if the game should end prematurely
 			String[][] guessHistory = new String[TRIES][SIZE];// 2d array the stores all guesses
-			String[][] answerHistory = new String[TRIES][SIZE];// 2D array that stores all answers
-			for (String[] strings : answerHistory) {// fills answerHistory array so there is no null
+			String[][] clueHistory = new String[TRIES][SIZE];// 2D array that stores all clues
+			for (String[] strings : clueHistory) {// fills clueHistory array so there is no null
 				Arrays.fill(strings, "");
 			}
 			for (String[] strings : guessHistory) {// fills guessHistory array so there is no null
@@ -47,13 +47,15 @@ public class code_Breaker {
 			String[] genCode = createCode(VALID_CHARS, SIZE);// genCode is the code the user is trying to guess
 
 			do {// loop for each guess of a game
-				String[] genCodeCOPY = genCode.clone();
+				String[] genCodeCOPY = genCode.clone();// gencCodeCOPY is a copy of the values of gencode. When evaluating
+														// for clues genCode would be modified therefore I made a copy and
+														// only genCodeCOPY is modified.
 
 				// code for advancing the state of the game
 				if (displaygenCode == true) {
 					System.out.println("GENERATED CODE:" + Arrays.toString(genCode));
 				}
-				System.out.println(displayGame(guessHistory, answerHistory, tryCount));// displays the game-board
+				System.out.println(displayGame(guessHistory, clueHistory, tryCount));// displays the game-board
 				String[] currentGuess = getInput(SIZE, VALID_CHARS);// after game is display user call getInput
 				for (int i = 0; i < SIZE; i++) {// adds to the guessHistory array in the row of the current tryCount
 					guessHistory[tryCount][i] = currentGuess[i];
@@ -66,24 +68,24 @@ public class code_Breaker {
 				String[] colourCorrctAns = findColourCorrect(genCodeCOPY, currentGuess);
 				// colourCorrctAns is the "w" component the the clues. The size of
 				// colourCorrctAns is exactly equal to the number of "w"
-				int writePos = 0;// Variable to track where i have written to in the aswerHistory array
+				int writePos = 0;// Variable to track where I have written to in the clueHistory array
 
-				for (int i = 0; i < fullyCorrectAns.length; i++) {// adds fullyCorrectAns to tryCount row in aswerHistory
-					answerHistory[tryCount][writePos] = fullyCorrectAns[i];
-					writePos++;// wrtiePos is ++ so that the position of the next clue is in the next index
+				for (int i = 0; i < fullyCorrectAns.length; i++) {// adds fullyCorrectAns to tryCount row in clueHistory
+					clueHistory[tryCount][writePos] = fullyCorrectAns[i];
+					writePos++;// writePos is ++ so that the position of the next clue is in the next index
 				}
-				for (int i = 0; i < colourCorrctAns.length; i++) {// adds colourCorrctAns to tryCount row in aswerHistory
-					answerHistory[tryCount][writePos] = colourCorrctAns[i];
-					writePos++;// wrtiePos is ++ so that the position of the next clue is in the next index
+				for (int i = 0; i < colourCorrctAns.length; i++) {// adds colourCorrctAns to tryCount row in clueHistory
+					clueHistory[tryCount][writePos] = colourCorrctAns[i];
+					writePos++;// writePos is ++ so that the position of the next clue is in the next index
 				}
-				if (fullyCorrectAns.length == SIZE) {// if the fullyCorrectAns is the same size as SIZE than the
+				if (fullyCorrectAns.length == SIZE) {// if the fullyCorrectAns is the same size as SIZE then the
 					// user has guessed the correct code
-					System.out.println(displayGame(guessHistory, answerHistory, tryCount + 1));// displays the game-board
+					System.out.println(displayGame(guessHistory, clueHistory, tryCount + 1));// displays the game-board
 					System.out.println("Congratulations! it took you " + (tryCount + 1) + " guess to find the code");
 					exit = true;
 					break;
 				} else if (tryCount >= TRIES - 1) {// checks to see if user has used all of your guesses
-					System.out.println(displayGame(guessHistory, answerHistory, tryCount + 1));// displays the game-board
+					System.out.println(displayGame(guessHistory, clueHistory, tryCount + 1));// displays the game-board
 					System.out.println("I'm sorry you lose. The correct code was " + Arrays.toString(genCode));
 					exit = true;
 				}
@@ -95,12 +97,12 @@ public class code_Breaker {
 			do {// do loop is for looping the game so you can play more than one game
 				System.out.println("Do you want to play again. press y for yes and press n for no");
 				playAgainAnswer = input.nextLine();
-			} while (valid(("yn"), 1, playAgainAnswer) == false);// if user enters "r" a new game is started
+			} while (valid(("yn"), 1, playAgainAnswer) == false);// if user enters "y" a new game is started
 			if (playAgainAnswer.equalsIgnoreCase("y")) {
 				playAgain = true;
 			}
 		} while (playAgain == true);// Loop for multiple games
-		System.out.println("Thank you for playing code breker we hope you come back soon!!!");
+		System.out.println("Thank you for playing code breaker we hope you come back soon!!!");
 	}
 
 	/**
@@ -296,18 +298,17 @@ public class code_Breaker {
 	 *            to display so that the user knows what there previous guesses were
 	 *            and what the clues were.
 	 *
-	 * @param answerHistory
+	 * @param clueHistory
 	 *            A 2D array that holds all of the user clues. This is necessary to
 	 *            display so that the user knows what there previous cues were.
 	 * @param tryCount
 	 *            An int the specifies what guess the user is on. This allows only
-	 *            the relevant rows of guessHistory and Answer History to be
-	 *            displayed.
+	 *            the relevant rows of guessHistory and clueHistory to be displayed.
 	 *
 	 * @return Returns a properly formated header with labels as well as the users
 	 *         precious entered guesses and clues.
 	 */
-	public static String displayGame(String[][] guessHistory, String[][] answerHistory, int tryCount) {// David
+	public static String displayGame(String[][] guessHistory, String[][] clueHistory, int tryCount) {// David
 		String toDisplay = "Guess \t \tClues\n****************\n";
 		String temp;
 		for (int i = 0; i < tryCount; i++) {// Adds multiple rows
@@ -317,7 +318,7 @@ public class code_Breaker {
 			}
 			toDisplay += "\t";// format to add new line
 			for (int j = 0; j < guessHistory[0].length; j++) {// adds clue history
-				temp = answerHistory[i][j];
+				temp = clueHistory[i][j];
 				toDisplay = toDisplay + temp + " ";// adds to toDisplay
 			}
 			toDisplay += "\n";// format to add new line
@@ -341,7 +342,7 @@ public class code_Breaker {
 				+ "But that's OK. You can get a new code and try again.\n\n" + "The Code Breaker code is made up of " + SIZE
 				+ " pegs  from " + VALID_CHARS.length() + " available colors.\n"
 				+ "These colors are symbolized as the following characters" + VALID_CHARS + ". \n"
-				+ "In addition b=black and w= white. To win you must place the  right marbles in the right order.\n"
+				+ "In addition b=black and w= white. To win you must place the right pegs in the right order.\n"
 				+ "After each attempt you will be told how you  went.\n\n"
 				+ "White clue - Means that there is one of your colors is in the code but not in  the right place. \n"
 				+ "Black clue - Means that there is one of your colors in the code and in the right place. \n"
